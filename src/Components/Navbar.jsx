@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import movieLogo from '../assets/movie.png';
 import { FaUserCircle, FaBars, FaSun, FaMoon } from 'react-icons/fa';
 import { useMediaQuery } from 'react-responsive';
@@ -9,16 +9,23 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [theme, setTheme] = useState('dark');
 
+  // Function to toggle the menu
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
+  // Function to toggle the theme
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
+    const newTheme = theme === 'light' ? 'dark' : 'light'; // Toggle theme between light and dark
+    setTheme(newTheme); // Set the new theme
+    document.documentElement.setAttribute('data-theme', newTheme); // Update the document's theme attribute
   };
-  
+
+  // Effect to update the theme when the component mounts
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme); // Set the initial theme on component mount
+  }, []);
+
   return (
     <>
       <nav className="bg-red-600">
@@ -42,10 +49,7 @@ const Navbar = () => {
                 <div className="ml-10 flex items-center space-x-4">
                   {/* Nav links */}
                   <Link to="/movies" className={`text-white hover:bg-red-700 px-3 py-2 rounded-md ${isMobile ? 'text-xl' : 'text-3xl'} font-medium font-jolly-lodger`}>
-                    NOW SHOWING
-                  </Link>
-                  <Link to="/booking" className={`text-white hover:bg-red-700 px-3 py-2 rounded-md ${isMobile ? 'text-xl' : 'text-3xl'} font-medium font-jolly-lodger`}>
-                    BUY A MOVIE
+                    COMING SOON
                   </Link>
                   {/* User placeholder */}
                   <Link to="/authentication" className="h-8 w-8 bg-gray-300 rounded-full flex items-center justify-center">
@@ -63,20 +67,18 @@ const Navbar = () => {
       </nav>
       {/* Mobile menu */}
       {isMobile && isOpen && (
-  <div className="bg-red-600 p-4 text-white fixed top-0 right-0 z-10 font-jolly-lodger">
-    <Link to="/movies" className="block my-2 text-xl">NOW SHOWING</Link>
-    <Link to="/booking" className="block my-2 text-xl">BUY A MOVIE</Link>
-    <Link to="/authentication" className="block my-2 text-xl">Profile</Link>
-    {/* Toggle theme buttons */}
-    <div className="flex justify-between">
-      <button onClick={toggleTheme} className="bg-gray-300 rounded-full h-8 w-8 flex items-center justify-center">
-        {theme === 'light' ? <FaMoon className="h-5 w-5 text-gray-600" /> : <FaSun className="h-5 w-5 text-gray-600" />}
-      </button>
-      <FaBars className="text-white cursor-pointer" onClick={toggleMenu} />
-    </div>
-  </div>
-)}
-
+        <div className="bg-red-600 p-4 text-white fixed top-0 right-0 z-10 font-jolly-lodger">
+          <Link to="/movies" className="block my-2 text-xl">COMING SOON</Link>
+          <Link to="/authentication" className="block my-2 text-xl">Profile</Link>
+          {/* Toggle theme buttons */}
+          <div className="flex justify-between">
+            <button onClick={toggleTheme} className="bg-gray-300 rounded-full h-8 w-8 flex items-center justify-center">
+              {theme === 'light' ? <FaMoon className="h-5 w-5 text-gray-600" /> : <FaSun className="h-5 w-5 text-gray-600" />}
+            </button>
+            <FaBars className="text-white cursor-pointer" onClick={toggleMenu} />
+          </div>
+        </div>
+      )}
     </>
   );
 };

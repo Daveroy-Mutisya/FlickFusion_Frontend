@@ -12,5 +12,10 @@ Currently, two official plugins are available:
 
 https://flick-fusion-frontend-git-main-dmbeastzs-projects.vercel.app/
 
+## Branch Deployment
+
+https://flick-fusion-frontend-git-davedebug-dmbeastzs-projects.vercel.app/
+
+
 
 

@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import movieLogo from '../assets/movie.png';
 import { FaUserCircle, FaBars } from 'react-icons/fa';
 import { useMediaQuery } from 'react-responsive';
 import { Link } from 'react-router-dom';
+import SearchBar from './SearchBar'; // Import the SearchBar component
 
-const Navbar = () => {
+const Navbar = ({ onSearch }) => { // Pass onSearch as a prop
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const [isOpen, setIsOpen] = useState(false);
 
@@ -32,6 +33,8 @@ const Navbar = () => {
               </div>
             ) : (
               <div className="hidden md:flex items-center">
+                {/* SearchBar component */}
+                <SearchBar onSearch={onSearch} />
                 <div className="ml-10 flex items-center space-x-4">
                   {/* Nav links */}
                   <Link to="/ontheatre" className={`text-white hover:bg-red-700 px-3 py-2 rounded-md ${isMobile ? 'text-xl' : 'text-3xl'} font-medium font-jolly-lodger`}>
@@ -59,7 +62,6 @@ const Navbar = () => {
     <FaBars className="text-white cursor-pointer" onClick={toggleMenu} />
   </div>
 )}
-
     </>
   );
 };
